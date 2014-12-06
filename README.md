@@ -8,7 +8,7 @@ It's not exactly easy to parse the data from ZenPortal, as GAW uses a socket.io 
 
 This is not most efficient code in terms of length or performance. As this was ported from the backend of [Hashlette.com](http://hashlette.com/), it was was written with structure as perhaps the highest priority. Instead of directly calling webpage elements, we crawl the DOM to find nested values and elements. The benefit of this approach is that it's highly scaleable and the underlying code is more flexible when GAW makes changes to the web interface.
 
-This is a highly iterative approach to scraping. We first find all entries on the Latest Activity page. Then we start iterating through them one by one. If it's a "device payout" type entry, we start parsing all the information. (Note that there are three possible formats that GAW provides, but the script parses each layout dynamically. See moredetail.md file for additional information.)
+This is an iterative approach to scraping. We first find all entries on the Latest Activity page. Then we start iterating through them one by one. If it's a "device payout" type entry, we start parsing all the information. (Note that there are three possible formats that GAW provides, but the script parses each layout dynamically. See moredetail.md file for additional information.)
 
 This continues onto previous pages until the script halts on the user specified date (see settings section below). Everything is stored in a large multidimensional array which is then passed to to the ezodf lib to write to an .ods file. If you wish to store data into an sqlite, csv, or other format, script will easily support whatever output provided there's an existing python lib and you make a few changes to the included write function.
 
