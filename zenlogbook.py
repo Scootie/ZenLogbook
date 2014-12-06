@@ -10,7 +10,7 @@ from selenium.common.exceptions import NoSuchElementException
 from decimal import Decimal
 import dataset
 import time, datetime
-import zenminer_logbook_settings
+import zenlogbook_settings
 import logging
 import pprint
 import re
@@ -227,15 +227,15 @@ def get_stats():
 	bacon =1
 	if bacon==1:	
 		driver = webdriver.Chrome()
-		logging.basicConfig(filename='zenminer_logbook.log', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',level=logging.INFO)
+		logging.basicConfig(filename='zenslogbook.log', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',level=logging.INFO)
 		driver.set_page_load_timeout(30)
 		ezodf.config.set_table_expand_strategy('all')
-		myspreadsheet = ezodf.opendoc(hashlette_settings.SPREADSHEETNAME)
-		logging.info('Time check - passed.')
-		login(driver,hashlette_settings.ZENMINER_USERNAME,hashlette_settings.ZENMINER_PASSWORD)
-		whatstopdate=get_stopdate(hashlette_settings.STOPDATE, myspreadsheet, hashlette_settings.SPREADSHEET_KEY)
+		myspreadsheet = ezodf.opendoc(zenlogbook_settings.SPREADSHEETNAME)
+		logging.info('Time check - passed.'
+		login(driver,hashlette_settings.ZENMINER_USERNAME,zenlogbook_settings.ZENMINER_PASSWORD)
+		whatstopdate=get_stopdate(zenlogbook_settings.STOPDATE, myspreadsheet, zenlogbook_settings.SPREADSHEET_KEY)
 		scraped_array = get_activitystats(driver,whatstopdate)
-		write_stats(scraped_array,whatstopdate,myspreadsheet,hashlette_settings.SPREADSHEET_KEY)
+		write_stats(scraped_array,whatstopdate,myspreadsheet,zenlogbook_settings.SPREADSHEET_KEY)
 
 
 		#cleanup_exit(driver)
