@@ -14,7 +14,7 @@ This continues onto previous pages until the script halts on the user specified 
 
 ## Settings
 
-The Zenminer_logbook_settings.py file contains the following:
+The zenlogbook_settings.py file contains the following:
 ```python
 SPREADSHEETNAME = 'zenminer_logbook.ods'
 STOPDATE = 'update' #options are yesterday and update
