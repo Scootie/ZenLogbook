@@ -54,7 +54,7 @@ def parse_remove(mystringdata,mytypedata):
 		mystringdata = re.sub("[^\d.]", "", mystringdata)
 	elif mytypedata=='datefromcss':
 		try:
-		    mystringdata = re.search('• (.+?) 00', mystringdata).group(1)
+		    mystringdata = re.search('• (.+?) ', mystringdata).group(1)
 		except AttributeError:
 		    # date not found in the original string
 		    mystringdata = '11/22/99' # something is wrong with data
@@ -115,10 +115,14 @@ def parsed_hashlet(driver,parsed_row):
 			hp_listmap={'fee':10,'HPpayout':8}
 			entry_listmap= dict(entry_listmap.items()+hp_listmap.items())
 
-		if len(entry_sum)==4:
+		if len(entry_sum)>=4:
 			doubledip_listmap={'secondpool':3, 'secondpool_actual':4}
 			entry_sum_listmap=dict(entry_sum_listmap.items()+doubledip_listmap.items())
 
+		if len(entry_sum)==6:
+			doubledip_listmap={'thirdpool':5, 'thirdpool_actual':6}
+			entry_sum_listmap=dict(entry_sum_listmap.items()+doubledip_listmap.items())
+		
 		for k,v in entry_listmap.iteritems():
 			parsed_array[k]=entry[v-1].text
 		
@@ -141,13 +145,14 @@ def parsed_hashlet(driver,parsed_row):
 		if len(entry)==10:
 			parsed_array['HPpayout']=parse_remove(parsed_array['HPpayout'],'numeric')
 
-		if len(entry_sum)==4:
+		if len(entry_sum)>=4:
+			print parsed_array['secondpool_actual']
 			parsed_array['secondpool_actual']=parse_remove(parsed_array['secondpool_actual'],'findperf')
 			parsed_array['secondpool']=parse_remove(parsed_array['secondpool'],'')
 
-			
-		#print parsed_array
-		
+		if len(entry_sum)==6:
+			parsed_array['thirdpool_actual']=parse_remove(parsed_array['secondpool_actual'],'findperf')
+			parsed_array['thirdpool']=parse_remove(parsed_array['thirdpool'],'')
 
 	except NoSuchElementException:
 		return False
@@ -163,13 +168,15 @@ def write_stats(write_array, mystopdate, myspreadsheet,columnkey):
 		#get count of rows/columns
 		maxrows = sheet.nrows()
 		#colcount = sheet.ncols()
-		sheet.append_rows(len(write_array.keys()))
+		writedate=mystopdate
 
 		for k,v in write_array.iteritems():
-			maxrows=maxrows+1
-			#iterating through dates
+			#iterating through dates in array
+			writedate=writedate+datetime.timedelta(days=1)
 			for n,m in v.iteritems():
-				sheet['%s%d' % (columnkey['date'],maxrows)].formula=str(k)
+				maxrows=maxrows+1
+				sheet.append_rows(1)
+				sheet['%s%d' % (columnkey['date'],maxrows)].set_value(writedate.strftime('%Y-%m-%d'),value_type='date')
 				sheet['%s%d' % (columnkey['devicename'],maxrows)].formula=str(n)
 				for p,q in m.iteritems():
 					sheet['%s%d' % (columnkey[p],maxrows)].formula=q
@@ -207,16 +214,6 @@ def check_exists_by_css(driver,css_selector):
         return False
     return True
 
-def check_hours():
-
-	timestamp = datetime.datetime.now().time() # Throw away the date information
-	time.sleep(1)
-
-	# Or check if a time is between two other times
-	start = datetime.time(15, 15)
-	end = datetime.time(23)
-
-	return (start <= timestamp <= end)
 
 def cleanup_exit(driver):
 	time.sleep(SLEEP_SECONDS)
@@ -224,8 +221,7 @@ def cleanup_exit(driver):
 
 
 def get_stats():
-	bacon =1
-	if bacon==1:	
+	try:
 		driver = webdriver.Chrome()
 		logging.basicConfig(filename='zenslogbook.log', format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',level=logging.INFO)
 		driver.set_page_load_timeout(30)
@@ -236,12 +232,10 @@ def get_stats():
 		whatstopdate=get_stopdate(zenlogbook_settings.STOPDATE, myspreadsheet, zenlogbook_settings.SPREADSHEET_KEY)
 		scraped_array = get_activitystats(driver,whatstopdate)
 		write_stats(scraped_array,whatstopdate,myspreadsheet,zenlogbook_settings.SPREADSHEET_KEY)
+		cleanup_exit(driver)
 
-
-		#cleanup_exit(driver)
-
-	else:
-		logging.warning("It's not time for scraping")
+	except:
+		logging.warning("We have a problem jim")
 		cleanup_exit(driver)
 
 
