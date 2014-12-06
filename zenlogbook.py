@@ -165,7 +165,7 @@ def write_stats(write_array, mystopdate, myspreadsheet,columnkey):
 		#colcount = sheet.ncols()
 		sheet.append_rows(len(write_array.keys()))
 
-		for k,v in bacon.iteritems():
+		for k,v in write_array.iteritems():
 			maxrows=maxrows+1
 			#iterating through dates
 			for n,m in v.iteritems():
