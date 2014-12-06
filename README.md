@@ -31,7 +31,7 @@ The SPREADSHEET_KEY is a python dict that is case sensitive. This provides the c
   
 ## Installation instructions
 
-Not provided.
+Will be added soon.
 
 ## License
 
