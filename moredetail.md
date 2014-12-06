@@ -9,6 +9,7 @@ The base layout for a Hashlet Solo entry looks like
 
 A Hashlet Prime due to HashPoints and Double Dipping has the ability to provide extended information
 >Device DeviceName (DeviceType)
+
 >Power: Value in GH or MH
 >BTC Payout: Value
 >HP Payout: Value
