@@ -21,7 +21,7 @@ STOPDATE = 'update' #options are yesterday and update
 SPREADSHEET_KEY={'date': 'A', 'devicename': 'B', 'devicetype':'C', 'power':'D', 'BTCpayout':'E', 'HPpayout':'F', 'fee':'G', 'firstpool': 'I', 'firstpool_actual':'J', 'secondpool':'K', 'secondpool_actual':'H'}
 ```
 
-The SPREADSHEET_KEY is a python dict that is case sensitive. This provides the correct column mappings to the spreadsheet. The spreadsheet must be created prior to running ZenLogbook. It will not automatically create file for you. The 'update' function provides a lookup on the date entered into the A column at the highest row. It's important that you resort the spreadsheet so that the dates are ascending to prevent duplicate entires.
+The SPREADSHEET_KEY is a python dict that is case sensitive. This provides the correct column mappings to the spreadsheet. The spreadsheet must be created prior to running ZenLogbook. It will not automatically create file for you. The 'update' function provides a lookup on the date entered into the A column at the highest row. It's important that you resort the spreadsheet so that the dates are ascending (newest date are last) to prevent duplicate entires.
 
 ## Requirements
   
