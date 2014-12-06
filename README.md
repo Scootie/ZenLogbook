@@ -10,7 +10,7 @@ This is not most efficient code in terms of length or performance. This was writ
 
 This is a highly iterative approach to scraping. We first find all entries on the Latest Activity page. Then we start iterating through them one by one. If it's a "device payout" type entry, we start parsing all the information. (Note that there are three possible formats that GAW provides, but the script parses each layout dynamically. See moredetail.md file for additional information.)
 
-This continues onto previous pages until the script meets the most recent date specified by the user in the spreadsheet. Everything is stored in a large multidimensional array which is then passed to to the ezodf lib to write to an .ods file. If you wish to store data into an sqlite, csv, or other format, script will easily support whatever output provided there's an existing python lib and you make a few changes to the included write function.
+This continues onto previous pages until the script halts on the user specified date (see settings section below). Everything is stored in a large multidimensional array which is then passed to to the ezodf lib to write to an .ods file. If you wish to store data into an sqlite, csv, or other format, script will easily support whatever output provided there's an existing python lib and you make a few changes to the included write function.
 
 ## Settings
 
