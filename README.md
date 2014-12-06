@@ -1,6 +1,6 @@
 ZenLogbook
 ========
-I wanted a way to track specific miner performance over time. It's a bit of a headache to do this manually, as you have to constantly login to ZenPortal and manually copy/enter information into a spreadsheet or sqldatabase. The process itself isn't just cumbersome, it's also open to the natural errors that creep into any data entry task. ZenLogbook was created to solve this problem. It parses all "device payout" entries from a user specified time.
+ZenLogbook arose out of a desire to release the automated backend tracking process behind [Hashlette.com](http://hashlette.com/) as open source. The requirement was thus: track specific miner performance over time. It's a bit of a headache to do this manually, as you have to constantly login to ZenPortal and manually copy/enter information into a spreadsheet or sqldatabase. The process itself isn't just cumbersome, it's also open to the natural errors that creep into any data entry task. ZenLogbook was created to solve this problem. It parses all "device payout" entries from a user specified time.
 
 It's not exactly easy to parse the data from ZenPortal, as GAW uses a socket.io connection to update information. This created further headaches as I always had to ensure proper handshakes and what not. Naturally, one could solve this problem in java, but I've been playing with python more lately, and doing it via the DOM is perhaps easier to maintain from a code perspective.
 
