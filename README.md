@@ -16,12 +16,14 @@ This continues onto previous pages until the script halts on the user specified 
 
 The zenlogbook_settings.py file contains the following:
 ```python
+ZENMINER_USERNAME = 'myusername'
+ZENMINER_PASSWORD = 'mypassword'
 SPREADSHEETNAME = 'zenminer_logbook.ods'
 STOPDATE = 'update' #options are yesterday and update
-SPREADSHEET_KEY={'date': 'A', 'devicename': 'B', 'devicetype':'C', 'power':'D', 'BTCpayout':'E', 'HPpayout':'F', 'fee':'G', 'firstpool': 'I', 'firstpool_actual':'J', 'secondpool':'K', 'secondpool_actual':'H'}
+SPREADSHEET_KEY={'date': 'A', 'devicename': 'B', 'devicetype':'C', 'power':'D', 'BTCpayout':'E', 'HPpayout':'F', 'fee':'G', 'firstpool': 'H', 'firstpool_actual':'I', 'secondpool':'J', 'secondpool_actual':'K','thirdpool':'L', 'thirdpool_actual':'M'}
 ```
 
-The SPREADSHEET_KEY is a python dict that is case sensitive. This provides the correct column mappings to the spreadsheet. The spreadsheet must be created prior to running ZenLogbook. It will not automatically create file for you. The 'update' function provides a lookup on the date entered into the A column at the highest row. It's important that you resort the spreadsheet so that the dates are ascending (newest date are last) to prevent duplicate entires.
+The SPREADSHEET_KEY is a python dict that is case sensitive. This provides the correct column mappings to the spreadsheet. The spreadsheet must be created prior to running ZenLogbook. It will not automatically create file for you. The 'update' function provides a lookup on the date entered into the A column at the highest row. If ZenLogbook is providing more data than you need, you can delete undesirable key mappings, which means they won't get entered into the spreadsheet. 
 
 ## Requirements
   
