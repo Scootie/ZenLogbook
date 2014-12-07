@@ -186,17 +186,13 @@ def write_stats(write_array, mystopdate, myspreadsheet,columnkey):
 		
 def get_stopdate(mystopdate,myspreadsheet,columnkey):
 	if mystopdate=='yesterday':
-		yesterday = datetime.datetime.now().date() - datetime.timedelta(days=1)
-		#stopdate = yesterday.strftime('%m/%d/%y')
-		#print mystopdate
+		stopdate = datetime.datetime.now().date() - datetime.timedelta(days=1)
 
 	elif mystopdate=='update':
 		sheet = myspreadsheet.sheets['Sheet1']
 		rowcount=sheet.nrows()
 		stopdate=sheet['%s%d'% (columnkey['date'],rowcount)].value
 		stopdate=datetime.datetime.strptime(stopdate,"%Y-%m-%d").date()
-		#stopdate=stopdate.strftime('%m/%d/%y')
-		#print stopdate
 
 	return stopdate
 
