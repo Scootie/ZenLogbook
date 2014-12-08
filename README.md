@@ -28,6 +28,7 @@ The SPREADSHEET_KEY is a python dict that is case sensitive. This provides the c
 ## Requirements
   
 * Python bindings for Selenium
+* ezodf (Python lib)
 * Selenium server
  * JRE 1.6 or newer
   
