@@ -223,7 +223,6 @@ def get_stats():
 		driver.set_page_load_timeout(30)
 		ezodf.config.set_table_expand_strategy('all')
 		myspreadsheet = ezodf.opendoc(zenlogbook_settings.SPREADSHEETNAME)
-		logging.info('Time check - passed.'
 		login(driver,hashlette_settings.ZENMINER_USERNAME,zenlogbook_settings.ZENMINER_PASSWORD)
 		whatstopdate=get_stopdate(zenlogbook_settings.STOPDATE, myspreadsheet, zenlogbook_settings.SPREADSHEET_KEY)
 		scraped_array = get_activitystats(driver,whatstopdate)
